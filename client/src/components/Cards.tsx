@@ -21,7 +21,7 @@ export default function ActionAreaCard(props: CardProps) {
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography variant="h5" component="div">
             {props.text}
           </Typography>
           <Typography variant="body2" color="text.secondary">
