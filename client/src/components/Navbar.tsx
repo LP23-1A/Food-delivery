@@ -20,7 +20,7 @@ import Link from "next/link";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   border: 1,
-  borderColor: "Black",
+  borderColor: "black",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
@@ -45,7 +45,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
+  color: "",
   width: "100%",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
@@ -95,7 +95,7 @@ export default function SearchAppBar() {
           ></Typography>
 
           <Stack flexDirection={"row"} gap={2} alignItems={"center"}>
-            <Search>
+            <Search sx={{ border: "solid black" }}>
               <SearchIconWrapper>
                 <SearchIcon sx={{ color: "black" }} />
               </SearchIconWrapper>
