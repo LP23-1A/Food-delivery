@@ -65,7 +65,7 @@ const navItems = ["Нүүр", "Хоолны цэс", "Хүргэлтийн Бү�
 export default function SearchAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: "#fff" }}>
         <Toolbar>
           <Link href="/">
             <IconButton

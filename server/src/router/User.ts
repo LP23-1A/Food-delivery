@@ -1,10 +1,14 @@
 import express from "express";
-import { userRegistration, login } from "../controller/User";
+import { deleteUser, login, signUp, updateUser } from "../controller/User";
 import { encrypt } from "../middleware";
 
 const auth = express.Router();
 
-auth.post("/register", encrypt, userRegistration);
-auth.post("/login", login);
+auth
+  .route("/register")
+  .post(encrypt, signUp)
+  .put(updateUser)
+  .delete(deleteUser);
+auth.route("/login").post(login);
 
 export { auth };

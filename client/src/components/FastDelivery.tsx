@@ -15,6 +15,7 @@ function FastDelivery(props: FastProps) {
         gap={4}
         flexDirection={"column"}
         sx={{
+          width: "264px",
           padding: "16px",
           justifyContent: "center",
           alignItems: "flex-start",

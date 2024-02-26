@@ -1,13 +1,13 @@
-"use client";
-import Box from "@mui/material/Box";
+import React, { useState } from "react";
+import Modal from "@mui/material/Modal";
+import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import TextField from "@mui/material/TextField";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { DialogTitle, Stack } from "@mui/material";
-import { useState } from "react";
+import Box from "@mui/material/Box";
+import LoginForm from "./LoginForm";
+import { DialogTitle } from "@mui/material";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const style = {
   position: "absolute" as "absolute",
@@ -21,11 +21,28 @@ const style = {
   p: 4,
 };
 
-function BasicModal() {
+function LoginModal() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    const api = "http://localhost:8000/user/login";
+    try {
+      const response = await axios.post(api, {
+        email,
+        password,
+      });
+      console.log("User logged in successfully!", response.data.token);
+      handleClose();
+    } catch (error: any) {
+      console.error("Login failed:", error.response.data);
+      // Display an error message to the user
+    }
+  };
 
   return (
     <Stack>
@@ -42,29 +59,14 @@ function BasicModal() {
           <DialogTitle id="modal-modal-title" variant="h6" component="h2">
             Нэвтрэх
           </DialogTitle>
-          <Typography
-            id="modal-modal-description"
-            sx={{ mt: 2, gap: 5, display: "flex", flexDirection: "column" }}
-          >
-            <TextField
-              required
-              id="outlined-required"
-              label="Имэйл"
-              placeholder="Имэйл хаягаа оруулна уу"
-            />
-
-            <TextField
-              id="outlined-password-input"
-              label="Нууц үг"
-              type="password"
-              autoComplete="current-password"
-              placeholder="Нууц үг"
-            />
-          </Typography>
+          <LoginForm
+            email={email}
+            password={password}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            handleLogin={handleLogin}
+          />
           <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-            <Button disabled variant="contained">
-              Нэвтрэх
-            </Button>
             <Typography alignSelf={"center"}>Эсвэл</Typography>
             <Button onClick={() => router.push("/signup")} variant="outlined">
               Бүртгүүлэх
@@ -75,4 +77,5 @@ function BasicModal() {
     </Stack>
   );
 }
-export default BasicModal;
+
+export default LoginModal;
