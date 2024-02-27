@@ -1,7 +1,7 @@
 "use client";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
-import { Box, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -105,13 +105,20 @@ export default function SearchAppBar() {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            <Stack flexDirection={"row"} gap={5} color={"black"}>
+            <Stack
+              flexDirection={"row"}
+              gap={5}
+              color={"black"}
+              alignItems={"center"}
+            >
               <Box sx={{ gap: 2, display: "flex" }}>
                 <ShoppingBasketIcon />
                 Сагс
               </Box>
-              <Box sx={{ gap: 2, display: "flex" }}>
-                <PersonIcon />
+              <Box sx={{ gap: 2, display: "flex", alignItems: "center" }}>
+                <Button>
+                  <PersonIcon sx={{ fontSize: "38px", color: "green" }} />
+                </Button>
                 <BasicModal />
               </Box>
             </Stack>
