@@ -16,6 +16,7 @@ import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import PersonIcon from "@mui/icons-material/Person";
 import BasicModal from "./ModalLogin";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -60,9 +61,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-const navItems = ["Нүүр", "Хоолны цэс", "Хүргэлтийн Бүс"];
+
+// "Нүүр", "Хоолны цэс", "Хүргэлтийн Бүс";
+const navItems = [
+  {
+    name: "Нүүр",
+    slug: "/",
+  },
+  {
+    name: "Хоолны цэс",
+    slug: "/menu",
+  },
+  {
+    name: "Хүргэлтийн бүс",
+    slug: "",
+  },
+];
 
 export default function SearchAppBar() {
+  const router = useRouter();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#fff" }}>
@@ -79,11 +96,13 @@ export default function SearchAppBar() {
             </IconButton>
           </Link>
           <List sx={{ display: "flex" }}>
-            {navItems.map((item) => (
-              <ListItem key={item} disablePadding>
-                <ListItemButton sx={{ textAlign: "center", width: "160px" }}>
-                  <ListItemText primary={item} sx={{ color: "black" }} />
-                </ListItemButton>
+            {navItems.map((item, index) => (
+              <ListItem key={item.slug + index} disablePadding>
+                <Link href={item.slug}>
+                  <ListItemButton sx={{ textAlign: "center", width: "160px" }}>
+                    <ListItemText primary={item.name} sx={{ color: "black" }} />
+                  </ListItemButton>
+                </Link>
               </ListItem>
             ))}
           </List>
@@ -117,7 +136,10 @@ export default function SearchAppBar() {
               </Box>
               <Box sx={{ gap: 2, display: "flex", alignItems: "center" }}>
                 <Button>
-                  <PersonIcon sx={{ fontSize: "38px", color: "green" }} />
+                  <PersonIcon
+                    onClick={() => router.push("/userprofile")}
+                    sx={{ fontSize: "38px", color: "green" }}
+                  />
                 </Button>
                 <BasicModal />
               </Box>
